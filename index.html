@@ -3,61 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>FitMapAI</title>
+
+  <!-- Safari'de üstte uygulama banner'ı gösterebilir -->
+  <meta name="apple-itunes-app" content="app-id=6786980864">
+
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      background:#0f1115;
-      color:white;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      text-align:center;
-      padding:24px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .card{
-      max-width:500px;
+
+    body {
+      background: #0f1115;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 24px;
     }
-    h1{
-      font-size:48px;
-      margin-bottom:16px;
+
+    .card {
+      width: 100%;
+      max-width: 500px;
     }
-    p{
-      color:#bdbdbd;
-      font-size:20px;
-      margin-bottom:40px;
-      line-height:1.5;
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 16px;
     }
-    a{
-      display:inline-block;
-      padding:18px 36px;
-      background:#b5ff00;
-      color:#000;
-      text-decoration:none;
-      border-radius:16px;
-      font-weight:700;
-      font-size:18px;
+
+    p {
+      color: #bdbdbd;
+      font-size: 20px;
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      padding: 18px 30px;
+      background: #b5ff00;
+      color: #000;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #fallback {
+      display: none;
+      margin-top: 24px;
+      color: #cfcfcf;
+      font-size: 15px;
+      line-height: 1.5;
     }
   </style>
 </head>
+
 <body>
+  <div class="card">
+    <h1>FitMapAI</h1>
 
-<div class="card">
-<h1>FitMapAI</h1>
+    <p>AI destekli antrenman ve beslenme koçun.</p>
 
-<p>
-AI destekli antrenman ve beslenme koçun.
-</p>
-<a
-  href="https://apps.apple.com/tr/app/fitmapai/id6786980864"
-  onclick="window.location.href=this.href; return false;"
->
-  Download on the App Store
-</a>
+    <button id="downloadButton" type="button">
+      App Store’dan İndir
+    </button>
 
-</div>
+    <div id="fallback">
+      App Store açılmadıysa sağ üstteki
+      <strong>•••</strong> simgesine basıp
+      <strong>Harici tarayıcıda aç</strong> seçeneğini kullan.
+    </div>
+  </div>
 
+  <script>
+    const appStoreAppLink =
+      "itms-apps://itunes.apple.com/app/id6786980864";
+
+    const appStoreWebLink =
+      "https://apps.apple.com/tr/app/fitmapai/id6786980864";
+
+    document
+      .getElementById("downloadButton")
+      .addEventListener("click", function () {
+        const fallback = document.getElementById("fallback");
+
+        // Kullanıcının doğrudan tıklamasıyla App Store uygulamasını açmayı dene.
+        window.location.href = appStoreAppLink;
+
+        // Instagram özel bağlantıyı engellerse normal bağlantıyı dene.
+        setTimeout(function () {
+          window.location.href = appStoreWebLink;
+          fallback.style.display = "block";
+        }, 1200);
+
+        // İkisini de engellerse kullanıcıya harici tarayıcı talimatını göster.
+        setTimeout(function () {
+          fallback.style.display = "block";
+        }, 2200);
+      });
+  </script>
 </body>
 </html>
